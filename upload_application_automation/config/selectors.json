@@ -1,0 +1,148 @@
+{
+  "_readme": [
+    "Every CSS selector the upload automation uses lives in this file, so the",
+    "portal's markup can change without anyone editing Python.",
+    "",
+    "Each entry is a LIST of candidate selectors tried in order; the first one",
+    "that matches (and is visible, where visibility is required) wins. That",
+    "makes the automation tolerant of small markup differences and lets you",
+    "add the portal's real selector to the front of a list without deleting",
+    "the existing fallbacks.",
+    "",
+    "The defaults below are best-effort guesses based on the portal being an",
+    "ASP.NET MVC app - they have NOT been verified against the live site.",
+    "Run 'python tools/inspect_page.py' to print the real selectors, then put",
+    "them at the front of the relevant lists.",
+    "",
+    "Besides standard CSS, Playwright's :has-text('...') pseudo-class is",
+    "supported for matching an element by its visible text, and :text-is('...')",
+    "for an exact match.",
+    "",
+    "Selectors under 'upload_dialog' are resolved INSIDE the dialog, not against",
+    "the whole page. The automation locates the dialog by finding the file input",
+    "and walking up to its enclosing dialog container, so these selectors can be",
+    "simple. That scoping matters: the Manage Application table behind the dialog",
+    "has its own SIP Batch filter listing every historical batch, and a",
+    "page-wide 'select[name*=Batch]' matches that filter instead of the dialog's",
+    "dropdown - which looks like success while the dialog stays empty.",
+    "",
+    "Note on 'upload_dialog.upload_button': it must point at the button that",
+    "SUBMITS the dialog. On this portal that button is labelled 'Save', which is",
+    "why the Save candidates come first; 'Upload' is kept as a fallback. It must",
+    "NOT match the 'Upload New Applications' button that opens the dialog, nor",
+    "the dialog's own Close/Cancel button - the automation refuses both rather",
+    "than silently reopening or dismissing the dialog."
+  ],
+
+  "login": {
+    "username": [
+      "#UserName",
+      "input[name='UserName']",
+      "input[name='username']",
+      "input[type='text'][id*='ser']",
+      "form input[type='text']"
+    ],
+    "password": [
+      "#Password",
+      "input[name='Password']",
+      "input[type='password']"
+    ],
+    "submit": [
+      "input[type='submit']",
+      "button[type='submit']",
+      "button:has-text('Log On')",
+      "button:has-text('Login')",
+      "input[value='Log On']"
+    ],
+    "error": [
+      ".validation-summary-errors",
+      ".alert-danger",
+      ".field-validation-error",
+      ".error-message"
+    ]
+  },
+
+  "nav": {
+    "application_tab": [
+      "a#Application",
+      "li.dropdown > a:has-text('Application')",
+      ".navbar a:has-text('Application')",
+      "#menu a:has-text('Application')",
+      "a:has-text('Application')"
+    ],
+    "manage_application": [
+      "a[href*='ManageApplication']",
+      ".dropdown-menu a:has-text('Manage Application')",
+      "ul.dropdown-menu a:has-text('Manage Application')",
+      "a:has-text('Manage Application')"
+    ]
+  },
+
+  "manage": {
+    "upload_new_applications": [
+      "a:has-text('Upload New Applications')",
+      "button:has-text('Upload New Applications')",
+      "input[type='button'][value*='Upload New']",
+      "input[type='submit'][value*='Upload New']",
+      "a[href*='Upload']"
+    ]
+  },
+
+  "upload_dialog": {
+    "container": [
+      ".modal.in",
+      ".modal.show",
+      "div[role='dialog']",
+      ".ui-dialog",
+      ".modal-content"
+    ],
+    "file_input": [
+      "input[type='file']"
+    ],
+    "choose_file_button": [
+      "label:has-text('Choose a file')",
+      "button:has-text('Choose a file')",
+      "a:has-text('Choose a file')",
+      "input[type='button'][value*='Choose']",
+      "*:has-text('Choose a file')"
+    ],
+    "sip_batch_select": [
+      "select[name*='Batch']",
+      "select[id*='Batch']",
+      "select[name*='batch']",
+      "select[id*='batch']",
+      "select"
+    ],
+    "upload_button": [
+      "button:text-is('Save')",
+      "input[type='submit'][value='Save']",
+      "input[type='button'][value='Save']",
+      "a:text-is('Save')",
+      "button:text-is('Upload')",
+      "input[type='submit'][value='Upload']",
+      "input[type='button'][value='Upload']",
+      "a:text-is('Upload')",
+      ".modal-footer button.btn-primary",
+      ".modal-footer input[type='submit']",
+      "button[type='submit']",
+      "input[type='submit']"
+    ]
+  },
+
+  "result": {
+    "success": [
+      ".alert-success",
+      ".validation-summary-valid",
+      ".toast-success",
+      ".message-success",
+      "#uploadSuccess"
+    ],
+    "error": [
+      ".validation-summary-errors",
+      ".alert-danger",
+      ".field-validation-error",
+      ".toast-error",
+      ".error-message"
+    ]
+  }
+}

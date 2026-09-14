@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# SIP automations - project-specific
+# (contains real applicant/organisation data - never commit)
+logs/
+_temp_attachments/
+**/tools/*_result.txt
+*.docx

@@ -1,0 +1,56 @@
+{
+  "description": "Required-field rules for the SIP Application Form (IIT). Field names correspond to the legacy Word form-field names (bookmark names) embedded in sip-application-form-iit.docx. 'placeholder_values' are default/unselected dropdown values that count as NOT filled in.",
+  "placeholder_values": ["Select One", "          "],
+  "sections": [
+    {
+      "section": "Section 1: Organisation",
+      "fields": [
+        {"name": "uen", "label": "Organisation Unique Entity Number (UEN)", "type": "text"},
+        {"name": "org_name", "label": "Organisation Name", "type": "text"},
+        {"name": "org_postal", "label": "Address - Postal Code", "type": "text"},
+        {"name": "org_country", "label": "Address - Country", "type": "dropdown"},
+        {"name": "org_tel", "label": "Tel no. (Main line)", "type": "text"},
+        {"name": "org_type", "label": "Type of Company", "type": "dropdown"},
+        {"name": "biz_nature", "label": "Nature of Business", "type": "dropdown"},
+        {"name": "org_staff_strength", "label": "No. of Staff in Organisation", "type": "text", "numeric": true}
+      ]
+    },
+    {
+      "section": "Section 2: Main Contact",
+      "fields": [
+        {"name": "contact_pref", "label": "Salutation", "type": "dropdown"},
+        {"name": "contact_name", "label": "Main Contact - Name", "type": "text"},
+        {"name": "contact_designation", "label": "Main Contact - Designation", "type": "text"},
+        {"name": "contact_email", "label": "Main Contact - Email address", "type": "text", "email": true},
+        {"name": "contact_tel", "label": "Main Contact - Tel no.", "type": "text"}
+      ]
+    },
+    {
+      "section": "Section 4: No. of Interns Required & Job Scope",
+      "fields": [
+        {"name": "dip1", "label": "Diploma (row 1)", "type": "dropdown"},
+        {"name": "dip1_no", "label": "No. of Interns Required (row 1)", "type": "text", "numeric": true},
+        {"name": "dip1_job", "label": "Job Scope / Proposed Project Title & Description (row 1)", "type": "text"}
+      ]
+    },
+    {
+      "section": "Section 5: Internship Details",
+      "fields": [
+        {"name": "Allowance", "label": "Monthly Allowance (CPF-Exempt)", "type": "text", "numeric": true},
+        {"name": "no_day_perwk", "label": "No. of Days per Week", "type": "text", "numeric": true}
+      ],
+      "checkbox_groups": [
+        {
+          "label": "Interview Requirement (at least one option must be checked)",
+          "fields": ["interview_face", "interview_phone", "interview_na", "interview_remote"]
+        }
+      ]
+    },
+    {
+      "section": "Section 7: Others",
+      "fields": [
+        {"name": "future_engagemt", "label": "Would you like to be contacted for future engagements with TP?", "type": "dropdown"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+# Shared dependencies for all automations in this repo.
+
+# Outlook (COM) automation - used by both automations.
+pywin32>=306
+
+# upload_application_automation only:
+# browser automation for the SIP intranet portal. Drives the installed Google
+# Chrome by default, so `playwright install chromium` is not required.
+playwright>=1.40
+# masks automation fingerprints (navigator.webdriver, plugins, WebGL)
+playwright-stealth>=2.0
+# stores the intranet credentials in Windows Credential Manager, so no
+# password needs to be written to a file (see set_credentials.py)
+keyring>=24.0
+# optional alternative: reads credentials from a gitignored .env
+python-dotenv>=1.0
+# writes logs/Failed_upload.xlsx
+openpyxl>=3.1
